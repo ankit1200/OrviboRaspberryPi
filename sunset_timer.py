@@ -19,7 +19,7 @@ def convertToScheduleTime(utcSunsetTime):
     fromZone = tz.tzutc()
     toZone = tz.tzlocal()
     datetimeSunsetUtc = datetime.strptime(utcSunsetTime, '%I:%M:%S %p')
-    datetimeSunsetUtc = datetimeSunsetUtc.replace(tzinfo=fromZone)
+    datetimeSunsetUtc = datetimeSunsetUtc.replace(year=2019, tzinfo=fromZone)
     return datetimeSunsetUtc.astimezone(toZone) - timedelta(minutes=30)
 
 
