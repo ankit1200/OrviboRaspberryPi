@@ -31,12 +31,17 @@ if __name__=="__main__":
 
     while True:
         currentTime = datetime.now()
+        print("Current Time: " +  str(currentTime))
         # Run once everyday at noon to get sunset time
         if (currentTime.hour * 100 + currentTime.minute) == 1200:
-            sunsetTimeString = getSunsetTime()
-            sunsetTime = convertToScheduleTime(sunsetTimeString)
+            try:
+                sunsetTimeString = getSunsetTime()
+                sunsetTime = convertToScheduleTime(sunsetTimeString)
+                print("Sunset Time: " + str(sunsetTime))
+            except Exception as e:
+                print("ERROR OCCURED GETTING SUNSET TIMES: " + str(e))
 
         if currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute:
             toggleSwitches()
 
-        time.sleep(30)
+        time.sleep(60)
