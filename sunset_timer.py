@@ -41,7 +41,9 @@ if __name__=="__main__":
             except Exception as e:
                 print("ERROR OCCURED GETTING SUNSET TIMES: " + str(e))
 
-        if currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute:
+        if (sunsetTime.hour < 7 and currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute):
+            toggleSwitches()
+        elif currentTime.hour == 7 and currentTime.minute == 0:
             toggleSwitches()
 
         time.sleep(60)
