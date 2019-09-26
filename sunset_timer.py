@@ -43,7 +43,7 @@ if __name__=="__main__":
 
         if (sunsetTime.hour < 7 and currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute):
             toggleSwitches()
-        elif currentTime.hour == 7 and currentTime.minute == 0:
+        elif currentTime.hour == 19 and currentTime.minute == 0:
             toggleSwitches()
 
         time.sleep(60)
