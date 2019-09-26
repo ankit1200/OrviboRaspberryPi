@@ -19,7 +19,7 @@ def convertToScheduleTime(utcSunsetTime):
     fromZone = tz.tzutc()
     toZone = tz.tzlocal()
     datetimeSunsetUtc = datetime.strptime(utcSunsetTime, '%I:%M:%S %p')
-    datetimeSunsetUtc = datetimeSunsetUtc.replace(tzinfo=fromZone)
+    datetimeSunsetUtc = datetimeSunsetUtc.replace(year=2019, tzinfo=fromZone)
     return datetimeSunsetUtc.astimezone(toZone) - timedelta(minutes=30)
 
 
@@ -31,12 +31,19 @@ if __name__=="__main__":
 
     while True:
         currentTime = datetime.now()
+        print("Current Time: " +  str(currentTime))
         # Run once everyday at noon to get sunset time
         if (currentTime.hour * 100 + currentTime.minute) == 1200:
-            sunsetTimeString = getSunsetTime()
-            sunsetTime = convertToScheduleTime(sunsetTimeString)
+            try:
+                sunsetTimeString = getSunsetTime()
+                sunsetTime = convertToScheduleTime(sunsetTimeString)
+                print("Sunset Time: " + str(sunsetTime))
+            except Exception as e:
+                print("ERROR OCCURED GETTING SUNSET TIMES: " + str(e))
 
-        if currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute:
+        if (sunsetTime.hour < 7 and currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute):
+            toggleSwitches()
+        elif currentTime.hour == 7 and currentTime.minute == 0:
             toggleSwitches()
 
-        time.sleep(30)
+        time.sleep(60)
