@@ -37,11 +37,12 @@ if __name__=="__main__":
             try:
                 sunsetTimeString = getSunsetTime()
                 sunsetTime = convertToScheduleTime(sunsetTimeString)
+                sunsetTime.hour = sunsetTime.hour - 1
                 print("Sunset Time: " + str(sunsetTime))
             except Exception as e:
                 print("ERROR OCCURED GETTING SUNSET TIMES: " + str(e))
 
-        if (sunsetTime.hour < 7 and currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute):
+        if (sunsetTime.hour < 19 and currentTime.hour == sunsetTime.hour and currentTime.minute == sunsetTime.minute):
             toggleSwitches()
         elif currentTime.hour == 19 and currentTime.minute == 0:
             toggleSwitches()
